@@ -1,6 +1,6 @@
 pipeline{
   agent{
-    lable 'docker-node'
+    label 'docker-node'
   }
   environment{
     Image = "myapp:${BUILD_NUMBER}"
