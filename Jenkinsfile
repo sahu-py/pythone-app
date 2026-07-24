@@ -35,7 +35,7 @@ pipeline{
     stage('deploy'){
       steps{
         sh '''
-            docker -rm myapp-f || true
+            docker -rm myapp -f || true
             docker run -d --name myapp -p 8080:8080 $Image
            '''
       }
