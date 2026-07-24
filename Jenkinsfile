@@ -16,6 +16,17 @@ pipeline{
         sh 'docker build -t $Image .' 
       }
     }
+    stage('trivy scan'){
+      steps{
+        sh '''
+            docker pull aquasec/trivy:latest
+            docker run --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v $HOME/.cache:/root/.cache \
+             aquasec/trivy image $Image
+            '''
+      }
+    }
     stage('test'){
       steps{
         sh 'docker run --rm $Image echo "running test"'
